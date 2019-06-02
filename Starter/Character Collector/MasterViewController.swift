@@ -40,6 +40,10 @@ class MasterViewController: UICollectionViewController {
     let refreshControl = UIRefreshControl()
     refreshControl.addTarget(self, action: #selector(MasterViewController.refreshControlDidFire), for: .valueChanged)
     collectionView?.refreshControl = refreshControl
+    
+//    let layout = collectionViewLayout as! CustomFlowLayout
+//    let defaultSize = layout.defaultScale * layout.itemSize.width
+//    layout.estimatedItemSize = CGSize(width: defaultSize, height: defaultSize)
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -91,24 +95,24 @@ extension MasterViewController {
 // MARK: UICollectionViewDelegateFlowLayout
 extension MasterViewController: UICollectionViewDelegateFlowLayout {
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (self.view.frame.width) / 3 - spacing - inset
-        
-        return CGSize(width: width, height: width)
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        let width = (self.view.frame.width) / 2
+//        
+//        return CGSize(width: width, height: width)
+//    }
+//    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+//
+//        return UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
+//    }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        
-        return UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return spacing
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return spacing
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+//        return spacing
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+//        return spacing
+//    }
 }
 
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		93D3654622A3E1EB009559F6 /* CustomFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D3654522A3E1EB009559F6 /* CustomFlowLayout.swift */; };
 		F5242B2D1DEE9F3100EC44AE /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5242B2C1DEE9F3100EC44AE /* DetailViewController.swift */; };
 		F53106FB1DEF581800768D8D /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53106FA1DEF581800768D8D /* GradientView.swift */; };
 		F577C8E81DEE419A004F074C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F577C8E71DEE419A004F074C /* AppDelegate.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		93D3654522A3E1EB009559F6 /* CustomFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFlowLayout.swift; sourceTree = "<group>"; };
 		F5242B2C1DEE9F3100EC44AE /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		F53106FA1DEF581800768D8D /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		F577C8E41DEE419A004F074C /* Character Collector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Character Collector.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -55,6 +57,7 @@
 		F50D7A4E1DF0782700BA3BAD /* Layouts */ = {
 			isa = PBXGroup;
 			children = (
+				93D3654522A3E1EB009559F6 /* CustomFlowLayout.swift */,
 			);
 			name = Layouts;
 			sourceTree = "<group>";
@@ -200,6 +203,7 @@
 				F5242B2D1DEE9F3100EC44AE /* DetailViewController.swift in Sources */,
 				F577C8FF1DEE61D7004F074C /* MasterViewController.swift in Sources */,
 				F577C9021DEE62FB004F074C /* CharactersCell.swift in Sources */,
+				93D3654622A3E1EB009559F6 /* CustomFlowLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
