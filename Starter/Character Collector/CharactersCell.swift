@@ -29,4 +29,33 @@ class CharactersCell: UICollectionViewCell {
     
   @IBOutlet weak var characterImage: UIImageView!
   @IBOutlet weak var characterTitle: UILabel!
+    
+
+    var character: Characters? {
+        didSet {
+            if let theCharacter = character {
+                characterImage.image = UIImage(named: theCharacter.name)
+                characterTitle.text = theCharacter.title
+            }
+        }
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        self.layer.cornerRadius = self.frame.width * 0.125
+        self.layer.borderWidth = 5
+        self.layer.borderColor = UIColor(red: 0.5, green: 0.5, blue: 0.25, alpha: 1).cgColor
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        characterTitle.text = ""
+        characterImage.image = nil
+    }
+    
 }

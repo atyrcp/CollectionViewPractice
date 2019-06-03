@@ -16,7 +16,7 @@
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THEUICollectionViewFlowLayout
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
@@ -28,7 +28,7 @@ import UIKit
 class MasterViewController: UICollectionViewController {
   
   let charactersData = Characters.loadCharacters()
-    let inset: CGFloat = 8.0
+    let inset: CGFloat = 30.0
     let spacing: CGFloat = 8.0
       
   override func viewDidLoad() {
@@ -41,9 +41,12 @@ class MasterViewController: UICollectionViewController {
     refreshControl.addTarget(self, action: #selector(MasterViewController.refreshControlDidFire), for: .valueChanged)
     collectionView?.refreshControl = refreshControl
     
-//    let layout = collectionViewLayout as! CustomFlowLayout
+    let layout = collectionViewLayout as! CustomFlowLayout
+    
 //    let defaultSize = layout.defaultScale * layout.itemSize.width
 //    layout.estimatedItemSize = CGSize(width: defaultSize, height: defaultSize)
+    layout.minimumLineSpacing = -(layout.itemSize.width * 0.5)
+    
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -80,6 +83,7 @@ extension MasterViewController {
     cell.characterImage.image = UIImage(named: character.name)
     cell.characterTitle.text = character.title
     
+    
     return cell
   }
 }
@@ -96,15 +100,15 @@ extension MasterViewController {
 extension MasterViewController: UICollectionViewDelegateFlowLayout {
     
 //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        let width = (self.view.frame.width) / 2
-//        
+//        let width = (self.view.frame.width) / 1.5
+//
 //        return CGSize(width: width, height: width)
 //    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
 //
-//        return UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
-//    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+
+        return UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
+    }
     
 //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
 //        return spacing
@@ -114,14 +118,3 @@ extension MasterViewController: UICollectionViewDelegateFlowLayout {
 //        return spacing
 //    }
 }
-
-
-
-
-
-
-
-
-
-
-

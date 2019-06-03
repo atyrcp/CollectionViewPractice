@@ -12,7 +12,7 @@ class CustomFlowLayout: UICollectionViewFlowLayout {
     let defaultAlpha: CGFloat = 0.5
     let defaultScale: CGFloat = 0.5
     
-    ;override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         guard let defaultAttributes = super.layoutAttributesForElements(in: rect) else {return nil}
         
         var resultAttributes = [UICollectionViewLayoutAttributes]()
@@ -47,5 +47,6 @@ class CustomFlowLayout: UICollectionViewFlowLayout {
         attribute.alpha = alpha
 //        attribute.transform = CGAffineTransform(scaleX: scale, y: scale)
         attribute.transform3D = CATransform3DScale(CATransform3DIdentity, scale, scale, 1)
+        attribute.zIndex = Int(alpha * 10)
     }
 }
