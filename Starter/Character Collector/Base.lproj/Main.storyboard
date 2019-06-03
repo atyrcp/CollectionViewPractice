@@ -39,13 +39,13 @@
                         <color key="backgroundColor" red="0.75039062499999998" green="0.70036458333333329" blue="0.37519531249999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="EHd-fW-CIL" customClass="CustomFlowLayout" customModule="Character_Collector" customModuleProvider="target">
                             <size key="itemSize" width="200" height="200"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="headerReferenceSize" width="50" height="180"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CharacterCell" id="iUb-XQ-IQw" customClass="CharactersCell" customModule="Character_Collector" customModuleProvider="target">
-                                <rect key="frame" x="87.5" y="0.0" width="200" height="200"/>
+                                <rect key="frame" x="87.5" y="180" width="200" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
@@ -87,6 +87,34 @@
                                 </connections>
                             </collectionViewCell>
                         </cells>
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="HeaderView" id="vEB-D2-Aal" customClass="CustomCollectionReusableView" customModule="Character_Collector" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HeaderBackground" translatesAutoresizingMaskIntoConstraints="NO" id="LLd-kJ-q2r">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
+                                </imageView>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HeaderLogo" translatesAutoresizingMaskIntoConstraints="NO" id="eLX-0w-oMz">
+                                    <rect key="frame" x="97.5" y="0.0" width="180" height="180"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="180" id="3ft-cS-A3g"/>
+                                        <constraint firstAttribute="width" constant="180" id="yGm-iU-7DO"/>
+                                    </constraints>
+                                </imageView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="LLd-kJ-q2r" firstAttribute="leading" secondItem="vEB-D2-Aal" secondAttribute="leading" id="F3z-Up-gmO"/>
+                                <constraint firstAttribute="bottom" secondItem="LLd-kJ-q2r" secondAttribute="bottom" id="Uc4-Di-D7e"/>
+                                <constraint firstItem="LLd-kJ-q2r" firstAttribute="top" secondItem="vEB-D2-Aal" secondAttribute="top" id="c74-I9-z3m"/>
+                                <constraint firstItem="eLX-0w-oMz" firstAttribute="centerX" secondItem="vEB-D2-Aal" secondAttribute="centerX" id="j4x-ai-jqd"/>
+                                <constraint firstItem="eLX-0w-oMz" firstAttribute="centerY" secondItem="vEB-D2-Aal" secondAttribute="centerY" id="n0Y-aY-WtZ"/>
+                                <constraint firstAttribute="trailing" secondItem="LLd-kJ-q2r" secondAttribute="trailing" id="xwI-CE-7Kv"/>
+                            </constraints>
+                            <connections>
+                                <outlet property="headerBackgroundImageView" destination="LLd-kJ-q2r" id="8dj-6q-WgG"/>
+                                <outlet property="headerLogoImageView" destination="eLX-0w-oMz" id="9oZ-0x-ufe"/>
+                            </connections>
+                        </collectionReusableView>
                         <connections>
                             <outlet property="dataSource" destination="jKa-7M-OOw" id="8Q0-Qb-9ec"/>
                             <outlet property="delegate" destination="jKa-7M-OOw" id="hav-g7-DeN"/>
@@ -222,4 +250,8 @@
             <point key="canvasLocation" x="917.60000000000002" y="107.49625187406298"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="HeaderBackground" width="1200" height="1200"/>
+        <image name="HeaderLogo" width="480" height="480"/>
+    </resources>
 </document>

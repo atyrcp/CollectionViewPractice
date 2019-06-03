@@ -59,6 +59,8 @@ class MasterViewController: UICollectionViewController {
     @objc func refreshControlDidFire() {
     collectionView?.reloadData()
     collectionView?.refreshControl?.endRefreshing()
+        
+    
   }
 
 }
@@ -69,7 +71,6 @@ extension MasterViewController {
   override func numberOfSections(in collectionView: UICollectionView) -> Int {
     return 1
   }
-  
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return charactersData.count
@@ -84,6 +85,16 @@ extension MasterViewController {
     
     return cell
   }
+    
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HeaderView", for: indexPath) as! CustomCollectionReusableView
+        view.frame = CGRect(x: 0, y: 0, width: self.collectionView.bounds.width, height: 180)
+        print(view.frame)
+        print(view.headerBackgroundImageView.frame)
+        print(self.collectionView.frame)
+        
+        return view
+    }
 }
 
 // MARK: UICollectionViewDelegate
@@ -108,10 +119,10 @@ extension MasterViewController: UICollectionViewDelegateFlowLayout {
 //        return CGSize(width: width, height: width)
 //    }
 //
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-
-        return UIEdgeInsets(top: inset + 100, left: inset, bottom: inset + 150, right: inset)
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+//
+//        return UIEdgeInsets(top: inset + 100, left: inset, bottom: inset + 150, right: inset)
+//    }
     
 //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
 //        return spacing
