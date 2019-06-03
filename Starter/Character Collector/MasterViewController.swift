@@ -28,9 +28,9 @@ import UIKit
 class MasterViewController: UICollectionViewController {
   
   let charactersData = Characters.loadCharacters()
-    let inset: CGFloat = 30.0
+    let inset: CGFloat = 160.0
     let spacing: CGFloat = 8.0
-      
+    var point: CGFloat = 0.0
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -79,9 +79,7 @@ extension MasterViewController {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CharacterCell", for: indexPath) as! CharactersCell
     
     // Configure the cell
-    let character = charactersData[indexPath.item]
-    cell.characterImage.image = UIImage(named: character.name)
-    cell.characterTitle.text = character.title
+    cell.character = charactersData[indexPath.item]
     
     
     return cell
@@ -92,7 +90,12 @@ extension MasterViewController {
 extension MasterViewController {
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     let character = charactersData[indexPath.item]
-    performSegue(withIdentifier: "MasterToDetail", sender: character)
+    let cell = collectionView.cellForItem(at: indexPath)
+    let selectedPoint = cell?.center.y
+    
+    if selectedPoint == point {
+        performSegue(withIdentifier: "MasterToDetail", sender: character)
+    }
   }
 }
 
@@ -107,7 +110,7 @@ extension MasterViewController: UICollectionViewDelegateFlowLayout {
 //
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
 
-        return UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
+        return UIEdgeInsets(top: inset + 100, left: inset, bottom: inset + 150, right: inset)
     }
     
 //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -117,4 +120,11 @@ extension MasterViewController: UICollectionViewDelegateFlowLayout {
 //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
 //        return spacing
 //    }
+}
+
+extension MasterViewController {
+    override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let layout = collectionView.collectionViewLayout as! CustomFlowLayout
+        point = layout.closestY
+    }
 }
