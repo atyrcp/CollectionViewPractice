@@ -42,7 +42,7 @@ class MasterViewController: UICollectionViewController {
     collectionView?.refreshControl = refreshControl
     
     let layout = collectionViewLayout as! CustomFlowLayout
-    
+    layout.maxStretch = self.collectionView.bounds.width
 //    let defaultSize = layout.defaultScale * layout.itemSize.width
 //    layout.estimatedItemSize = CGSize(width: defaultSize, height: defaultSize)
     layout.minimumLineSpacing = -(layout.itemSize.width * 0.5)
@@ -59,8 +59,6 @@ class MasterViewController: UICollectionViewController {
     @objc func refreshControlDidFire() {
     collectionView?.reloadData()
     collectionView?.refreshControl?.endRefreshing()
-        
-    
   }
 
 }
@@ -88,11 +86,18 @@ extension MasterViewController {
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HeaderView", for: indexPath) as! CustomCollectionReusableView
+        
+        
+        
         view.frame = CGRect(x: 0, y: 0, width: self.collectionView.bounds.width, height: 180)
+//        view.headerBackgroundImageView.frame = CGRect(x: 0, y: 0, width: self.collectionView.bounds.width, height: view.frame.height)
+        
+//        view.headerBackgroundImageView.image = nil
+//        view.headerLogoImageView.image = nil
+        
         print(view.frame)
         print(view.headerBackgroundImageView.frame)
-        print(self.collectionView.frame)
-        
+        print(view.headerLogoImageView.frame)
         return view
     }
 }

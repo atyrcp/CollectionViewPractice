@@ -8,11 +8,33 @@
 
 import UIKit
 
+class CustomHeaderViewLayoutAttributes: UICollectionViewLayoutAttributes {
+    var deltaY: CGFloat = 0.0
+    
+    override func copy(with zone: NSZone? = nil) -> Any {
+        let copy = super.copy(with: zone) as! CustomHeaderViewLayoutAttributes
+        copy.deltaY = self.deltaY
+        
+        return copy
+    }
+    
+    override func isEqual(_ object: Any?) -> Bool {
+        if let attribute = object as? CustomHeaderViewLayoutAttributes {
+            if attribute.deltaY == self.deltaY {
+                return super.isEqual(object)
+            }
+        }
+        return false
+    }
+}
+
 class CustomFlowLayout: UICollectionViewFlowLayout {
     let defaultAlpha: CGFloat = 0.5
     let defaultScale: CGFloat = 0.5
     var closestY: CGFloat = 0.0
     var didSetupCollectionview = false
+    var maxStretch: CGFloat = 0.0
+    
     override func prepare() {
         super.prepare()
         
@@ -21,6 +43,11 @@ class CustomFlowLayout: UICollectionViewFlowLayout {
             setupCollectionview()
         }
         
+    }
+    
+    
+    override class var layoutAttributesClass : AnyClass {
+        return CustomHeaderViewLayoutAttributes.self
     }
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
@@ -32,13 +59,16 @@ class CustomFlowLayout: UICollectionViewFlowLayout {
         
         for attribute in defaultAttributes {
             if attribute.representedElementKind != nil {
+                let customHeaderAttributes = attribute as! CustomHeaderViewLayoutAttributes
                 if offset.y < 0 {
                     let deltaY = abs(offset.y)
-                    var frame = attribute.frame
-                    frame.size.height = max(0, headerReferenceSize.height + deltaY)
+                    customHeaderAttributes.deltaY = deltaY
+                    var frame = customHeaderAttributes.frame
+                    frame.size.height = min(max(0, headerReferenceSize.height + deltaY), maxStretch)
+//                    frame.size.height = max(0, headerReferenceSize.height + deltaY)
                     frame.origin.y = frame.minY - deltaY
-                    attribute.frame = frame
-                    resultAttributes.append(attribute)
+                    customHeaderAttributes.frame = frame
+                    resultAttributes.append(customHeaderAttributes)
                 }
             } else {
                 let copyAttribute = attribute.copy() as! UICollectionViewLayoutAttributes
@@ -50,28 +80,6 @@ class CustomFlowLayout: UICollectionViewFlowLayout {
         
         return resultAttributes
     }
-    
-//    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-//        let layoutAttributes = super.layoutAttributesForElements(in: rect)! as [UICollectionViewLayoutAttributes]
-//
-//        let offset = collectionView!.contentOffset
-//        if (offset.y < 0) {
-//            let deltaY = fabs(offset.y)
-//            for attributes in layoutAttributes {
-//                if let elementKind = attributes.representedElementKind {
-//                    if elementKind == UICollectionElementKindSectionHeader {
-//                        var frame = attributes.frame
-//                        frame.size.height = max(0, headerReferenceSize.height + deltaY)
-//                        frame.origin.y = frame.minY - deltaY
-//                        attributes.frame = frame
-//                    }
-//                }
-//            }
-//        }
-//
-//        return layoutAttributes
-//    }
-    
     
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         return true
