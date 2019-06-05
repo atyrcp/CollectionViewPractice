@@ -25,11 +25,14 @@ class CustomLayout: UICollectionViewLayout {
     override func prepare() {
         super.prepare()
         if cache.isEmpty {
-            let columnWidth = width / CGFloat(numberOfColumns)
+            let numberOfPadding = numberOfColumns - 1
+            let padding: CGFloat = 10
+            let columnWidth = (width - CGFloat(numberOfPadding) * padding) / CGFloat(numberOfColumns)
+            
             
             var xOffset = [CGFloat]()
             for column in 0..<numberOfColumns {
-                let offset = columnWidth * CGFloat(column)
+                let offset = (columnWidth + padding) * CGFloat(column)
                 xOffset.append(offset)
             }
             
@@ -45,7 +48,7 @@ class CustomLayout: UICollectionViewLayout {
                 cache.append(attribute)
                 
                 contentHeight = max(frame.maxY, contentHeight)
-                yOffset[column] = yOffset[column] + cellHeight
+                yOffset[column] = yOffset[column] + cellHeight + 10
                 column = column >= numberOfColumns - 1 ? 0 : column + 1
             }
         }
