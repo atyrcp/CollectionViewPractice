@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol CustomLayoutDelegate {
+    func collectionView(_ collectionview: UICollectionView, _ heightForItemAtIndexPath: IndexPath) -> CGFloat
+}
+
 class CustomLayout: UICollectionViewLayout {
     
     var numberOfColumns = 0
@@ -17,6 +21,7 @@ class CustomLayout: UICollectionViewLayout {
     var width: CGFloat {
         return collectionView!.bounds.width
     }
+    var delegate: CustomLayoutDelegate!
     
     override var collectionViewContentSize: CGSize {
         return CGSize(width: width, height: contentHeight)
@@ -41,6 +46,8 @@ class CustomLayout: UICollectionViewLayout {
             var column = 0
             for item in 0..<collectionView!.numberOfItems(inSection: 0) {
                 let indexPath = IndexPath(item: item, section: 0)
+                
+                cellHeight = delegate.collectionView(collectionView!, indexPath)
                 let frame = CGRect(x: xOffset[column], y: yOffset[column], width: columnWidth, height: cellHeight)
                 
                 let attribute = UICollectionViewLayoutAttributes(forCellWith: indexPath)
