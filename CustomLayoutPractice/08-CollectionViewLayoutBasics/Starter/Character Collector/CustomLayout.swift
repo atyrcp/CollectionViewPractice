@@ -9,19 +9,44 @@
 import UIKit
 
 protocol CustomLayoutDelegate {
-    func collectionView(_ collectionview: UICollectionView, _ heightForItemAtIndexPath: IndexPath) -> CGFloat
+    func collectionView(_ collectionview: UICollectionView, heightForItemAtIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat
+    
+    func collectionView(_ collectionview: UICollectionView, heightForDescriptionLabelAtIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat
+}
+
+class CustomCollectionViewLayoutAttribute: UICollectionViewLayoutAttributes {
+    var imageHeight: CGFloat = 0
+    
+    override func copy(with zone: NSZone? = nil) -> Any {
+        let copy = super.copy(with: zone) as! CustomCollectionViewLayoutAttribute
+        copy.imageHeight = self.imageHeight
+        return copy
+    }
+    
+    override func isEqual(_ object: Any?) -> Bool {
+        if let attribute = object as? CustomCollectionViewLayoutAttribute {
+            if attribute.imageHeight == self.imageHeight {
+                return super.isEqual(object)
+            }
+        }
+        return false
+    }
 }
 
 class CustomLayout: UICollectionViewLayout {
     
     var numberOfColumns = 0
-    var cache = [UICollectionViewLayoutAttributes]()
+    var cache = [CustomCollectionViewLayoutAttribute]()
     var contentHeight: CGFloat = 0
     var cellHeight: CGFloat = 300
     var width: CGFloat {
         return collectionView!.bounds.width
     }
     var delegate: CustomLayoutDelegate!
+    
+    override class var layoutAttributesClass: AnyClass {
+        return CustomCollectionViewLayoutAttribute.self
+    }
     
     override var collectionViewContentSize: CGSize {
         return CGSize(width: width, height: contentHeight)
@@ -47,11 +72,16 @@ class CustomLayout: UICollectionViewLayout {
             for item in 0..<collectionView!.numberOfItems(inSection: 0) {
                 let indexPath = IndexPath(item: item, section: 0)
                 
-                cellHeight = delegate.collectionView(collectionView!, indexPath)
+                let cellImageHeight = delegate.collectionView(collectionView!, heightForItemAtIndexPath: indexPath, withWidth: columnWidth)
+                let cellLabelHeight = delegate.collectionView(collectionView!, heightForDescriptionLabelAtIndexPath: indexPath, withWidth: columnWidth)
+                
+                cellHeight = cellImageHeight + cellLabelHeight + padding
+                
                 let frame = CGRect(x: xOffset[column], y: yOffset[column], width: columnWidth, height: cellHeight)
                 
-                let attribute = UICollectionViewLayoutAttributes(forCellWith: indexPath)
+                let attribute = CustomCollectionViewLayoutAttribute(forCellWith: indexPath)
                 attribute.frame = frame
+                attribute.imageHeight = cellImageHeight
                 cache.append(attribute)
                 
                 contentHeight = max(frame.maxY, contentHeight)

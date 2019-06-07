@@ -80,13 +80,17 @@ extension MasterViewController {
 }
 
 extension MasterViewController: CustomLayoutDelegate {
-    func collectionView(_ collectionview: UICollectionView, _ heightForItemAtIndexPath: IndexPath) -> CGFloat {
+    
+    func collectionView(_ collectionview: UICollectionView, heightForItemAtIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat {
         
         let randomHeightConstant = CGFloat.random(in: 1..<4)
         let height = randomHeightConstant * 100
         return height
     }
     
+    func collectionView(_ collectionview: UICollectionView, heightForDescriptionLabelAtIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat {
+        return 60
+    }
     
 }
 

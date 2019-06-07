@@ -29,7 +29,8 @@ class RoundedCharacterCell: UICollectionViewCell {
   @IBOutlet weak var characterImage: UIImageView!
   @IBOutlet weak var characterTitle: UILabel!
   @IBOutlet weak var characterInfo: UILabel!
-  
+  @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
+    
   var character: Characters? {
     didSet {
       if let theCharacter = character {
@@ -40,6 +41,12 @@ class RoundedCharacterCell: UICollectionViewCell {
     }
   }
   
+    override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
+        super.apply(layoutAttributes)
+        let attribute = layoutAttributes as! CustomCollectionViewLayoutAttribute
+        self.imageViewHeightConstraint.constant = attribute.imageHeight
+    }
+    
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     
