@@ -54,7 +54,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FrA-Ac-GzZ">
                                             <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Mci-5H-M8J">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Mci-5H-M8J">
                                                     <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="200" id="qi6-Ke-a78"/>
@@ -77,12 +77,10 @@
                                                 <constraint firstItem="E8T-1q-fWY" firstAttribute="leading" secondItem="FrA-Ac-GzZ" secondAttribute="leading" constant="12" id="1IM-7c-ZzH"/>
                                                 <constraint firstItem="Mci-5H-M8J" firstAttribute="top" secondItem="FrA-Ac-GzZ" secondAttribute="top" id="6pY-gl-4f9"/>
                                                 <constraint firstAttribute="trailing" secondItem="QgD-26-u1s" secondAttribute="trailing" id="IDp-wh-yXh"/>
-                                                <constraint firstAttribute="height" constant="300" id="VBl-fz-4iu"/>
                                                 <constraint firstAttribute="trailing" secondItem="E8T-1q-fWY" secondAttribute="trailing" constant="12" id="krd-hi-oJr"/>
                                                 <constraint firstItem="QgD-26-u1s" firstAttribute="top" secondItem="Mci-5H-M8J" secondAttribute="bottom" constant="8" id="lDc-n9-01I"/>
                                                 <constraint firstItem="QgD-26-u1s" firstAttribute="leading" secondItem="FrA-Ac-GzZ" secondAttribute="leading" id="n7Z-rW-rWk"/>
                                                 <constraint firstAttribute="trailing" secondItem="Mci-5H-M8J" secondAttribute="trailing" id="t6s-E0-HvV"/>
-                                                <constraint firstAttribute="width" constant="200" id="uV1-g4-yFW"/>
                                                 <constraint firstItem="E8T-1q-fWY" firstAttribute="top" secondItem="QgD-26-u1s" secondAttribute="bottom" constant="8" id="wFt-pr-chH"/>
                                             </constraints>
                                         </view>

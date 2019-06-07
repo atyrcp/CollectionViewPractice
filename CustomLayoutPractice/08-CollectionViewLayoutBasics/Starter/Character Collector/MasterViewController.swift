@@ -24,6 +24,7 @@
  */ 
 
 import UIKit
+import AVFoundation
 
 class MasterViewController: UICollectionViewController {
   
@@ -83,15 +84,26 @@ extension MasterViewController: CustomLayoutDelegate {
     
     func collectionView(_ collectionview: UICollectionView, heightForItemAtIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat {
         
-        let randomHeightConstant = CGFloat.random(in: 1..<4)
-        let height = randomHeightConstant * 100
-        return height
+        let data = charactersData[indexPath.item]
+        let image = UIImage(named: data.name)
+        let area = CGRect(x: 0, y: 0, width: width, height: CGFloat(MAXFLOAT))
+        let rect = AVMakeRect(aspectRatio: image!.size, insideRect: area)
+        
+        return rect.height
     }
     
     func collectionView(_ collectionview: UICollectionView, heightForDescriptionLabelAtIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat {
-        return 60
+        let character = charactersData[indexPath.item]
+        let descriptionHeight = heightForText(character.description, width: width-24)
+        let height = 4 + 17 + 4 + descriptionHeight + 12
+        return height
     }
     
+    func heightForText(_ text: String, width: CGFloat) -> CGFloat {
+        let font = UIFont.systemFont(ofSize: 10)
+        let rect = NSString(string: text).boundingRect(with: CGSize(width: width, height: CGFloat(MAXFLOAT)), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
+        return ceil(rect.height)
+    }
 }
 
 
